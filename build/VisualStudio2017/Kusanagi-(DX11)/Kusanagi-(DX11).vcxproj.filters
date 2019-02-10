@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{07d7ef33-b500-4534-bc94-e6a7c2b2e1ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{cd46b561-c36b-431d-9018-82d643e78315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\controller">
+      <UniqueIdentifier>{90ea3cc6-eef5-4164-a831-ca719009bd6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\model">
+      <UniqueIdentifier>{aab8e50d-6e84-47d8-b3a2-d9b221bd4a7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\view">
+      <UniqueIdentifier>{b0a896f5-d68b-473a-881f-0180a3cc8b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\view\render">
+      <UniqueIdentifier>{c4bf2967-5c73-4209-a3b6-24eca9335d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\controller">
+      <UniqueIdentifier>{75d9bb3d-7175-4378-b684-25d16ee6afb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\model">
+      <UniqueIdentifier>{7dd22979-0292-4e8d-a9d0-212114e17bb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\view">
+      <UniqueIdentifier>{1302be62-b662-43f7-907f-8e3b05164845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\view\render">
+      <UniqueIdentifier>{5573581d-2a75-4647-b7c4-0d54179f86d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\utils">
+      <UniqueIdentifier>{cda97f23-5a00-4505-8fff-4c3981f1c5eb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\Core.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\view\View.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\view\render\Render-DX11.cpp">
+      <Filter>src\view\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\model\Model.cpp">
+      <Filter>src\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\controller\Controller.cpp">
+      <Filter>src\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\view\Window.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\Core.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\EntryPoint.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\Kusanagi.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\View.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\model\Model.h">
+      <Filter>include\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\controller\Controller.h">
+      <Filter>include\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\render\Render-DX11.h">
+      <Filter>include\view\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\render\IRender.h">
+      <Filter>include\view\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\Window.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\utils\EventManager.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\utils\EventListener.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
