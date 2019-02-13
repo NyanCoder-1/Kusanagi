@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Kusanagi-(DX11)", "build\VisualStudio2017\Kusanagi-(DX11)\Kusanagi-(DX11).vcxproj", "{150FD455-8663-4E53-9E43-0FF6FA517311}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "apps\Test\Test.vcxproj", "{DE03B7AC-86B1-48A8-B72B-F15305F73B4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{150FD455-8663-4E53-9E43-0FF6FA517311} = {150FD455-8663-4E53-9E43-0FF6FA517311}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

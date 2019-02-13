@@ -1,15 +1,23 @@
 #pragma once
 
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
+#include "View\IWindow.h"
+
 namespace Kusanagi::View
 {
-	class Window
+	class WinWindow : public IWindow
 	{
 	private:
 		HWND hWnd;
 
 	public:
-		Window();
-		~Window();
+		WinWindow();
+		~WinWindow();
+
+		void Create() override;
+		void Update() override;
 
 		HWND GetHandler();
 

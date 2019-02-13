@@ -51,7 +51,7 @@
     <ClCompile Include="..\..\..\src\controller\Controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\view\Window.cpp">
+    <ClCompile Include="..\..\..\src\view\WinWindow.cpp">
       <Filter>src\view</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,14 +80,17 @@
     <ClInclude Include="..\..\..\include\view\render\IRender.h">
       <Filter>include\view\render</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\view\Window.h">
-      <Filter>include\view</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\utils\EventManager.h">
       <Filter>include\utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\utils\EventListener.h">
       <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\WinWindow.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\IWindow.h">
+      <Filter>include\view</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

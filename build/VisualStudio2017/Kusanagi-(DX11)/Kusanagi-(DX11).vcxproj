@@ -23,7 +23,7 @@
     <ClCompile Include="..\..\..\src\Core.cpp" />
     <ClCompile Include="..\..\..\src\model\Model.cpp" />
     <ClCompile Include="..\..\..\src\view\render\Render-DX11.cpp" />
-    <ClCompile Include="..\..\..\src\view\Window.cpp" />
+    <ClCompile Include="..\..\..\src\view\WinWindow.cpp" />
     <ClCompile Include="..\..\..\src\view\View.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,10 +34,11 @@
     <ClInclude Include="..\..\..\include\model\Model.h" />
     <ClInclude Include="..\..\..\include\utils\EventListener.h" />
     <ClInclude Include="..\..\..\include\utils\EventManager.h" />
+    <ClInclude Include="..\..\..\include\view\IWindow.h" />
     <ClInclude Include="..\..\..\include\view\render\Render-DX11.h" />
     <ClInclude Include="..\..\..\include\view\render\IRender.h" />
     <ClInclude Include="..\..\..\include\view\View.h" />
-    <ClInclude Include="..\..\..\include\view\Window.h" />
+    <ClInclude Include="..\..\..\include\view\WinWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -1,7 +1,21 @@
-﻿################################################################################
-# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
-################################################################################
+﻿/.vs
+/apps/*/Release
+/apps/*/Debug
+/apps/*/x64/Release
+/apps/*/x64/Debug
+/build/VisualStudio2017/*/Release
+/build/VisualStudio2017/*/Debug
+/build/VisualStudio2017/*/x64/Release
+/build/VisualStudio2017/*/x64/Debug
 
-/.vs/Kusanagi/v15
-/apps/Test/Debug
-/build/VisualStudio2017/Kusanagi-(DX11)/Debug
+# Исполняемые файлы, кроме отладочных, оставляем
+/bin32/*
+/bin64/*
+!/bin32/*.exe
+!/bin64/*.exe
+!/bin32/*.lib
+!/bin64/*.lib
+!/bin32/*.dll
+!/bin64/*.dll
+/bin32/*_debug*
+/bin64/*_debug*
