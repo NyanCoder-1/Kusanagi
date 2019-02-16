@@ -3,10 +3,10 @@
 /apps/*/Debug
 /apps/*/x64/Release
 /apps/*/x64/Debug
-/build/VisualStudio2017/*/Release
-/build/VisualStudio2017/*/Debug
-/build/VisualStudio2017/*/x64/Release
-/build/VisualStudio2017/*/x64/Debug
+/build/*/*/Release
+/build/*/*/Debug
+/build/*/*/x64/Release
+/build/*/*/x64/Debug
 
 # Исполняемые файлы, кроме отладочных, оставляем
 /bin32/*
@@ -17,5 +17,5 @@
 !/bin64/*.lib
 !/bin32/*.dll
 !/bin64/*.dll
-/bin32/*_debug*
-/bin64/*_debug*
+/bin32/*_debug.*
+/bin64/*_debug.*

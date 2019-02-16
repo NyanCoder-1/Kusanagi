@@ -3,12 +3,17 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
-#include "View\IWindow.h"
+#include "window/IWindow.h"
+#include "utils/EventManager.h"
 
-namespace Kusanagi::View
+namespace Kusanagi::Window
 {
 	class WinWindow : public IWindow
 	{
+	public:
+		// EventTypes
+		typedef Kusanagi::Utils::EventListenerTemplate<> EventClose;
+
 	private:
 		HWND hWnd;
 

@@ -10,32 +10,48 @@ namespace Kusanagi::Utils
 		EventListener() {}
 		virtual ~EventListener() {};
 
-		virtual void _cdecl Run(...) = 0;
-		virtual inline void _cdecl operator()() = 0;
+		virtual void _cdecl Run(void *sender, ...) = 0;
+		virtual inline void _cdecl operator()(void *sender, ...) = 0;
 	};
 
 	template <typename ...Args>
-	class EventListenerTemplate
+	class EventListenerTemplate : public EventListener
 	{
 	private:
-		std::function<void(Args...)> listener;
+		std::function<void(void*, Args...)> action;
 
 	public:
-		EventListenerTemplate(std::function<void(Args...)> listener) {
-			EventListenerTemplate::listener = listener;
+		EventListenerTemplate(std::function<void(void*, Args...)> action) {
+			EventListenerTemplate::action = action;
 		}
 
-		void _cdecl Run(Args... args) override
+		void _cdecl Run(void *sender, Args... args) override
 		{
-			listener(args...);
+			action(sender, args...);
 		}
-		void _cdecl Run() override
+		inline void _cdecl operator()(void *sender, Args... args) override
 		{
+			Run(sender, args...);
+		}
+	};
+	template <>
+	class EventListenerTemplate<> : public EventListener
+	{
+	private:
+		std::function<void(void*)> action;
 
+	public:
+		EventListenerTemplate(std::function<void(void*)> action) {
+			EventListenerTemplate::action = action;
 		}
-		inline void _cdecl operator()(Args... args) override
+
+		void _cdecl Run(void *sender, ...) override
 		{
-			Run(args);
+			action(sender);
+		}
+		inline void _cdecl operator()(void *sender, ...) override
+		{
+			Run(sender);
 		}
 	};
 }
