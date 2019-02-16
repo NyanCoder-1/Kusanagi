@@ -38,10 +38,12 @@
     <ClInclude Include="..\..\..\include\utils\EventManager.h" />
     <ClInclude Include="..\..\..\include\utils\Exception.h" />
     <ClInclude Include="..\..\..\include\utils\Format.h" />
+    <ClInclude Include="..\..\..\include\view\render\Render.h" />
     <ClInclude Include="..\..\..\include\window\IWindow.h" />
     <ClInclude Include="..\..\..\include\view\render\Render-DX11.h" />
     <ClInclude Include="..\..\..\include\view\render\IRender.h" />
     <ClInclude Include="..\..\..\include\view\View.h" />
+    <ClInclude Include="..\..\..\include\window\Window.h" />
     <ClInclude Include="..\..\..\include\window\WinWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

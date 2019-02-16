@@ -6,11 +6,27 @@ namespace Kusanagi
 	{
 		class IWindow;
 	}
+	namespace Model
+	{
+		class Model;
+	}
+	namespace View
+	{
+		class View;
+	}
+	namespace Controller
+	{
+		class Controller;
+	}
+
 	class Core
 	{
 	private:
 		bool running;
 		Kusanagi::Window::IWindow *wnd;
+		Kusanagi::Model::Model *model;
+		Kusanagi::View::View *view;
+		Kusanagi::Controller::Controller *controller;
 
 	public:
 		Core();

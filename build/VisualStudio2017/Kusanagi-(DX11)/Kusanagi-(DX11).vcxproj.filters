@@ -113,5 +113,11 @@
     <ClInclude Include="..\..\..\include\window\WinWindow.h">
       <Filter>include\window</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\include\window\Window.h">
+      <Filter>include\window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\render\Render.h">
+      <Filter>include\view\render</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
