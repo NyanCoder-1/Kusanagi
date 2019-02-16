@@ -1,10 +1,18 @@
 #pragma once
 
-namespace Kusanagi::View
+namespace Kusanagi
 {
-	class View
+	class Core;
+
+	namespace View
 	{
-	public:
-		View();
-	};
+		class View
+		{
+		private:
+			Kusanagi::Core *core;
+
+		public:
+			View(Kusanagi::Core *core);
+		};
+	}
 }

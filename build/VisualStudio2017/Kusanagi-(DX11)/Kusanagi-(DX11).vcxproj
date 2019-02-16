@@ -22,8 +22,10 @@
     <ClCompile Include="..\..\..\src\controller\Controller.cpp" />
     <ClCompile Include="..\..\..\src\Core.cpp" />
     <ClCompile Include="..\..\..\src\model\Model.cpp" />
+    <ClCompile Include="..\..\..\src\utils\Exception.cpp" />
+    <ClCompile Include="..\..\..\src\utils\Format.cpp" />
     <ClCompile Include="..\..\..\src\view\render\Render-DX11.cpp" />
-    <ClCompile Include="..\..\..\src\view\WinWindow.cpp" />
+    <ClCompile Include="..\..\..\src\window\WinWindow.cpp" />
     <ClCompile Include="..\..\..\src\view\View.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -34,11 +36,13 @@
     <ClInclude Include="..\..\..\include\model\Model.h" />
     <ClInclude Include="..\..\..\include\utils\EventListener.h" />
     <ClInclude Include="..\..\..\include\utils\EventManager.h" />
-    <ClInclude Include="..\..\..\include\view\IWindow.h" />
+    <ClInclude Include="..\..\..\include\utils\Exception.h" />
+    <ClInclude Include="..\..\..\include\utils\Format.h" />
+    <ClInclude Include="..\..\..\include\window\IWindow.h" />
     <ClInclude Include="..\..\..\include\view\render\Render-DX11.h" />
     <ClInclude Include="..\..\..\include\view\render\IRender.h" />
     <ClInclude Include="..\..\..\include\view\View.h" />
-    <ClInclude Include="..\..\..\include\view\WinWindow.h" />
+    <ClInclude Include="..\..\..\include\window\WinWindow.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

@@ -21,7 +21,7 @@ namespace Kusanagi::Utils
 				delete listener;
 		}
 
-		void addEventListener(std::string type, Kusanagi::Utils::EventListener *listener, bool deleteHere = true)
+		void AddEventListener(std::string type, Kusanagi::Utils::EventListener *listener, bool deleteHere = true)
 		{
 			// prevent repeating
 			bool find = false;
@@ -39,7 +39,7 @@ namespace Kusanagi::Utils
 			if (deleteHere)
 				deletable.push_back(listener);
 		}
-		void removeEventListener(std::string type, Kusanagi::Utils::EventListener *listener)
+		void RemoveEventListener(std::string type, Kusanagi::Utils::EventListener *listener)
 		{
 			auto listenerList = events.find(type);
 			if (listenerList != events.end())
@@ -70,7 +70,7 @@ namespace Kusanagi::Utils
 		}
 
 		template <typename ...Args>
-		void event(std::string type, Args ...args)
+		void Event(std::string type, Args ...args)
 		{
 			auto listenerList = events.find(type);
 			if (listenerList != events.end())

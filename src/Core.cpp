@@ -10,7 +10,7 @@ Kusanagi::Core::Core()
 	running = true;
 #ifdef _WIN32
 	wnd = new Kusanagi::Window::WinWindow();
-	wnd->addEventListener("close", new Kusanagi::Window::WinWindow::EventClose([=](void* sender)->void {
+	wnd->AddEventListener("close", new Kusanagi::Window::WinWindow::EventClose([=](void* sender)->void {
 		this->running = false;
 	}));
 #endif

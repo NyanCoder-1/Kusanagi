@@ -67,7 +67,7 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 	switch (nMsg)
 	{
 	case WM_CLOSE:
-		event("close");
+		Event("close");
 		break;
 	default:
 		return DefWindowProcW(hWnd, nMsg, wParam, lParam);

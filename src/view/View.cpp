@@ -1,6 +1,8 @@
 #include "view/View.h"
 
-Kusanagi::View::View::View()
+#include "Core.h"
+
+Kusanagi::View::View::View(Kusanagi::Core *core) : core(core)
 {
 
 }

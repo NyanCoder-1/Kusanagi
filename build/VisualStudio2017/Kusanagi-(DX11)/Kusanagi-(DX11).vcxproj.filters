@@ -34,6 +34,15 @@
     <Filter Include="include\utils">
       <UniqueIdentifier>{cda97f23-5a00-4505-8fff-4c3981f1c5eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{c46afb96-fe4c-41a3-ab6b-876f1a3d94f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\window">
+      <UniqueIdentifier>{cbcbcbe6-ba8d-4cf8-93e2-5a19a839b8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\window">
+      <UniqueIdentifier>{80a378ec-849c-4678-907f-08a0c2910caa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\Core.cpp">
@@ -51,8 +60,14 @@
     <ClCompile Include="..\..\..\src\controller\Controller.cpp">
       <Filter>src\controller</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\view\WinWindow.cpp">
-      <Filter>src\view</Filter>
+    <ClCompile Include="..\..\..\src\utils\Exception.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\utils\Format.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\window\WinWindow.cpp">
+      <Filter>src\window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,11 +101,17 @@
     <ClInclude Include="..\..\..\include\utils\EventListener.h">
       <Filter>include\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\view\WinWindow.h">
-      <Filter>include\view</Filter>
+    <ClInclude Include="..\..\..\include\utils\Exception.h">
+      <Filter>include\utils</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\view\IWindow.h">
-      <Filter>include\view</Filter>
+    <ClInclude Include="..\..\..\include\utils\Format.h">
+      <Filter>include\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\window\IWindow.h">
+      <Filter>include\window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\window\WinWindow.h">
+      <Filter>include\window</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
