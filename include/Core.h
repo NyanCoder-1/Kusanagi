@@ -30,8 +30,10 @@ namespace Kusanagi
 
 	public:
 		Core();
+		~Core();
 
 		int Run();
+		void Terminate();
 
 	public:
 		Kusanagi::Window::IWindow *GetWindow() const;

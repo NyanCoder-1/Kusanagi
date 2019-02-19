@@ -24,6 +24,7 @@
 * src\window\WinWindow.h // WinAPI window
 ```
 ## Рекомендации по оформлению
-* Файлы называть Snake-Case'ом
+* Файлы называть гибридом из Snake-Case и PascalCase
+* Папки называть гибридом из Snake-Case и camelCase
 * Классы, методы классов, типы и пространства имён называть PascalCase'ом
 * Поля называть camelCase'ом

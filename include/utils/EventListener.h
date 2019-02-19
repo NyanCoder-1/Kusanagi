@@ -9,9 +9,6 @@ namespace Kusanagi::Utils
 	public:
 		EventListener() {}
 		virtual ~EventListener() {};
-
-		virtual void _cdecl Run(void *sender, ...) = 0;
-		virtual inline void _cdecl operator()(void *sender, ...) = 0;
 	};
 
 	template <typename ...Args>
@@ -25,11 +22,11 @@ namespace Kusanagi::Utils
 			EventListenerTemplate::action = action;
 		}
 
-		void _cdecl Run(void *sender, Args... args) override
+		void _cdecl Run(void *sender, Args... args)
 		{
 			action(sender, args...);
 		}
-		inline void _cdecl operator()(void *sender, Args... args) override
+		inline void _cdecl operator()(void *sender, Args... args)
 		{
 			Run(sender, args...);
 		}
@@ -45,11 +42,11 @@ namespace Kusanagi::Utils
 			EventListenerTemplate::action = action;
 		}
 
-		void _cdecl Run(void *sender, ...) override
+		void _cdecl Run(void *sender) 
 		{
 			action(sender);
 		}
-		inline void _cdecl operator()(void *sender, ...) override
+		inline void _cdecl operator()(void *sender) 
 		{
 			Run(sender);
 		}

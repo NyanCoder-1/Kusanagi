@@ -75,7 +75,14 @@ namespace Kusanagi::Utils
 			auto listenerList = events.find(type);
 			if (listenerList != events.end())
 				for (Kusanagi::Utils::EventListener *listener : listenerList->second)
-					listener->Run(this, args...);
+					reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<Args...>*>(listener)->Run(this, args...);
+		}
+		void Event(std::string type)
+		{
+			auto listenerList = events.find(type);
+			if (listenerList != events.end())
+				for (Kusanagi::Utils::EventListener *listener : listenerList->second)
+					reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<>*>(listener)->Run(this);
 		}
 	};
 }

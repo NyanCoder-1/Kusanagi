@@ -12,9 +12,9 @@
 
 int main()
 try {
-	Kusanagi::Core *core = new Kusanagi::Core();
+	Kusanagi::Core core;
 
-	return core->Run();
+	return core.Run();
 }
 catch (const Kusanagi::Utils::Exception &e)
 {

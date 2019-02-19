@@ -13,6 +13,10 @@ namespace Kusanagi::Window
 	public:
 		// EventTypes
 		typedef Kusanagi::Utils::EventListenerTemplate<> EventClose;
+		typedef Kusanagi::Utils::EventListenerTemplate<long> EventKey;
+		typedef Kusanagi::Utils::EventListenerTemplate<long, long> EventMouseMove;
+		typedef Kusanagi::Utils::EventListenerTemplate<wchar_t> EventType;
+		typedef Kusanagi::Utils::EventListenerTemplate<bool> EventActivate;
 
 	private:
 		HWND hWnd;

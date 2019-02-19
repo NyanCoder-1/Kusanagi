@@ -1,5 +1,6 @@
 #include "window/WinWindow.h"
 #include "utils/Exception.h"
+#include "utils/Format.h"
 
 Kusanagi::Window::WinWindow::WinWindow()
 {
@@ -38,6 +39,24 @@ void Kusanagi::Window::WinWindow::Create()
 		throw Kusanagi::Utils::Exception("Can't create window", 0x01000002, __FILE__, __LINE__);
 	SetWindowLongPtrW(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(this));
 
+	{
+		RAWINPUTDEVICE Rid[2];
+
+		Rid[0].usUsagePage = 0x01;
+		Rid[0].usUsage = 0x02;
+		Rid[0].dwFlags = 0; RIDEV_NOLEGACY;   // adds HID mouse and also ignores legacy mouse messages
+		Rid[0].hwndTarget = hWnd;
+
+		Rid[1].usUsagePage = 0x01;
+		Rid[1].usUsage = 0x06;
+		Rid[1].dwFlags = 0; RIDEV_NOLEGACY;   // adds HID keyboard and also ignores legacy keyboard messages
+		Rid[1].hwndTarget = hWnd;
+
+		if (RegisterRawInputDevices(Rid, 2, sizeof(Rid[0])) == FALSE)
+			//registration failed. Call GetLastError for the cause of the error
+			throw Kusanagi::Utils::Exception(Kusanagi::Utils::Format("RawInput devices registration failed with code %d", GetLastError()), 0x01000003, __FILE__, __LINE__);
+	}
+
 	ShowWindow(hWnd, SW_SHOW);
 }
 
@@ -66,6 +85,55 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 {
 	switch (nMsg)
 	{
+	case WM_CHAR:
+		Event("type", (wchar_t)wParam);
+		break;
+
+	case WM_INPUT:
+	{
+		UINT dwSize;
+
+		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER)); // Get RawInput data size
+		LPBYTE lpb = new BYTE[dwSize];
+		if (lpb == NULL)
+			break;
+
+		if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) // Get RawInput data
+		{
+			OutputDebugString(TEXT("GetRawInputData does not return correct size !\n"));
+			break;
+		}
+
+		RAWINPUT* raw = (RAWINPUT*)lpb;
+
+		if (raw->header.dwType == RIM_TYPEKEYBOARD)
+		{
+			Event((raw->data.keyboard.Flags & 1) ? "keyup" : "keydown", raw->data.keyboard.VKey);
+		}
+		else if (raw->header.dwType == RIM_TYPEMOUSE)
+		{
+			if (raw->data.mouse.usButtonFlags & 0x1) Event("keydown", (long)VK_LBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x4) Event("keydown", (long)VK_RBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x10) Event("keydown", (long)VK_MBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x40) Event("keydown", (long)VK_XBUTTON1);
+			if (raw->data.mouse.usButtonFlags & 0x100) Event("keydown", (long)VK_XBUTTON2);
+			if (raw->data.mouse.usButtonFlags & 0x2) Event("keyup", (long)VK_LBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x8) Event("keyup", (long)VK_RBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x20) Event("keyup", (long)VK_MBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x80) Event("keyup", (long)VK_XBUTTON1);
+			if (raw->data.mouse.usButtonFlags & 0x200) Event("keyup", (long)VK_XBUTTON2);
+			if (raw->data.mouse.lLastX || raw->data.mouse.lLastY)
+				Event("mousemove", (long)raw->data.mouse.lLastX, (long)raw->data.mouse.lLastY);
+		}
+
+		delete[] lpb;
+		break;
+	}
+
+	case WM_ACTIVATE:
+		Event("activate", (bool)(wParam != WA_INACTIVE));
+		break;
+
 	case WM_CLOSE:
 		Event("close");
 		break;

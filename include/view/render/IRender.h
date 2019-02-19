@@ -8,7 +8,7 @@ namespace Kusanagi
 	{
 		class IRender
 		{
-		private:
+		protected:
 			Kusanagi::Core *core;
 
 		public:

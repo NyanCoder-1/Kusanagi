@@ -12,7 +12,9 @@ namespace Kusanagi
 			Kusanagi::Core *core;
 
 		public:
-			Model();
+			Model(Kusanagi::Core *core);
+
+			void Update();
 		};
 	}
 }
