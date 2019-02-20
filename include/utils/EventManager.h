@@ -2,6 +2,7 @@
 
 #include <list>
 #include <map>
+#include <vector>
 #include <string>
 
 #include "utils/EventListener.h"
@@ -11,44 +12,69 @@ namespace Kusanagi::Utils
 	class EventManager
 	{
 	private:
-		std::map<std::string, std::list<Kusanagi::Utils::EventListener*>> events;
+		std::vector<std::list<Kusanagi::Utils::EventListener*>> events;
+		std::map<std::string, long long> keys;
 		std::list<Kusanagi::Utils::EventListener*> deletable;
 
 	public:
+		EventManager() : EventManager(std::vector<std::string>{}) {}
+		EventManager(std::vector<std::string> keys)
+		{
+			long long i = 0;
+			for (std::string &str : keys)
+				if (this->keys.find(str) == this->keys.end())
+					this->keys[str] = i++;
+			events.resize(i);
+		}
 		virtual ~EventManager()
 		{
 			for (Kusanagi::Utils::EventListener* listener : deletable)
 				delete listener;
 		}
 
-		void AddEventListener(std::string type, Kusanagi::Utils::EventListener *listener, bool deleteHere = true)
+	protected:
+		long long AddEvent(std::string name)
 		{
-			// prevent repeating
-			bool find = false;
-			for (Kusanagi::Utils::EventListener *lstnr : events[type])
-				if (lstnr == listener)
-					find = true;
+			if (keys.find(name) == this->keys.end())
+			{
+				long long id = keys[name] = events.size();
+				events.push_back(std::list<Kusanagi::Utils::EventListener*>());
+				return id;
+			}
+			return -1;
+		}
 
-			// if exist, do nothing
-			if (find)
+	public:
+		void AddEventListener(std::string eventName, Kusanagi::Utils::EventListener *listener, bool deleteHere = true)
+		{
+			// search for key existing
+			long long id = GetEventID(eventName);
+			// do nothing if key not exist
+			if ((id < 0) && (id >= events.size()))
+			{
+				// and delete listener if it's deletable
+				if (deleteHere && listener)
+					delete listener;
 				return;
-			// adding listener
-			events[type].push_back(listener);
+			}
+			// add listener
+			events[id].push_back(listener);
 
 			// set delete check
 			if (deleteHere)
 				deletable.push_back(listener);
 		}
-		void RemoveEventListener(std::string type, Kusanagi::Utils::EventListener *listener)
+		void RemoveEventListener(std::string eventName, Kusanagi::Utils::EventListener *listener)
 		{
-			auto listenerList = events.find(type);
-			if (listenerList != events.end())
+			long long id = GetEventID(eventName);
+			if ((id >= 0) && (id < events.size()))
 			{
 				// search listener
-				for (auto iter = listenerList->second.begin(); iter != listenerList->second.end();)
+				auto &e = events[id];
+				for (auto iter = e.begin(); iter != e.end();)
 					if (*iter == listener)
 					{
-						// check if deletable
+						// deletablenes
 						for (auto iter1 = deletable.begin(); iter1 != deletable.end();)
 							if (*iter1 == listener)
 							{
@@ -57,32 +83,46 @@ namespace Kusanagi::Utils
 							}
 							else
 								iter1++;
+
 						// remove from list
-						iter = listenerList->second.erase(iter);
+						iter = e.erase(iter);
 					}
 					else
 						iter++;
-
-				// remove list if empty
-				if (listenerList->second.empty())
-					events.erase(listenerList);
 			}
 		}
 
-		template <typename ...Args>
-		void Event(std::string type, Args ...args)
+		long long GetEventID(std::string eventName)
 		{
-			auto listenerList = events.find(type);
-			if (listenerList != events.end())
-				for (Kusanagi::Utils::EventListener *listener : listenerList->second)
-					reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<Args...>*>(listener)->Run(this, args...);
+			auto id = keys.find(eventName);
+			if ((id == keys.end()) || (id->second < 0) || (id->second >= events.size()))
+				return -1;
+			return id->second;
 		}
-		void Event(std::string type)
+
+		template <typename ...Args>
+		void Event(std::string eventName, Args ...args)
 		{
-			auto listenerList = events.find(type);
-			if (listenerList != events.end())
-				for (Kusanagi::Utils::EventListener *listener : listenerList->second)
-					reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<>*>(listener)->Run(this);
+			Event(GetEventID(eventName), args...);
+		}
+		void Event(std::string eventName)
+		{
+			Event(GetEventID(eventName));
+		}
+		template <typename ...Args>
+		void Event(long long id, Args ...args)
+		{
+			if ((id < 0) && (id >= events.size()))
+				return;
+			for (Kusanagi::Utils::EventListener *listener : events[id])
+				reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<Args...>*>(listener)->Run(this, args...);
+		}
+		void Event(long long id)
+		{
+			if ((id < 0) && (id >= events.size()))
+				return;
+			for (Kusanagi::Utils::EventListener *listener : events[id])
+				reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<>*>(listener)->Run(this);
 		}
 	};
 }

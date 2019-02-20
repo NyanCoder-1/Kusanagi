@@ -20,6 +20,12 @@ namespace Kusanagi::Window
 
 	private:
 		HWND hWnd;
+		long long keydownEventID;
+		long long keyupEventID;
+		long long mousemoveEventID;
+		long long typeEventID;
+		long long activateEventID;
+		long long closeEventID;
 
 	public:
 		WinWindow();

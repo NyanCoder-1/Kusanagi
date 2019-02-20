@@ -4,7 +4,12 @@
 
 Kusanagi::Window::WinWindow::WinWindow()
 {
-
+	keydownEventID = AddEvent("keydown");
+	keyupEventID = AddEvent("keyup");
+	mousemoveEventID = AddEvent("mousemove");
+	activateEventID = AddEvent("activate");
+	closeEventID = AddEvent("close");
+	typeEventID = AddEvent("type");
 }
 Kusanagi::Window::WinWindow::~WinWindow()
 {
@@ -86,7 +91,7 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 	switch (nMsg)
 	{
 	case WM_CHAR:
-		Event("type", (wchar_t)wParam);
+		Event(typeEventID, (wchar_t)wParam);
 		break;
 
 	case WM_INPUT:
@@ -108,22 +113,22 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 
 		if (raw->header.dwType == RIM_TYPEKEYBOARD)
 		{
-			Event((raw->data.keyboard.Flags & 1) ? "keyup" : "keydown", raw->data.keyboard.VKey);
+			Event((raw->data.keyboard.Flags & 1) ? keyupEventID : keydownEventID, raw->data.keyboard.VKey);
 		}
 		else if (raw->header.dwType == RIM_TYPEMOUSE)
 		{
-			if (raw->data.mouse.usButtonFlags & 0x1) Event("keydown", (long)VK_LBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x4) Event("keydown", (long)VK_RBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x10) Event("keydown", (long)VK_MBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x40) Event("keydown", (long)VK_XBUTTON1);
-			if (raw->data.mouse.usButtonFlags & 0x100) Event("keydown", (long)VK_XBUTTON2);
-			if (raw->data.mouse.usButtonFlags & 0x2) Event("keyup", (long)VK_LBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x8) Event("keyup", (long)VK_RBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x20) Event("keyup", (long)VK_MBUTTON);
-			if (raw->data.mouse.usButtonFlags & 0x80) Event("keyup", (long)VK_XBUTTON1);
-			if (raw->data.mouse.usButtonFlags & 0x200) Event("keyup", (long)VK_XBUTTON2);
+			if (raw->data.mouse.usButtonFlags & 0x1) Event(keydownEventID, (long)VK_LBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x4) Event(keydownEventID, (long)VK_RBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x10) Event(keydownEventID, (long)VK_MBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x40) Event(keydownEventID, (long)VK_XBUTTON1);
+			if (raw->data.mouse.usButtonFlags & 0x100) Event(keydownEventID, (long)VK_XBUTTON2);
+			if (raw->data.mouse.usButtonFlags & 0x2) Event(keyupEventID, (long)VK_LBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x8) Event(keyupEventID, (long)VK_RBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x20) Event(keyupEventID, (long)VK_MBUTTON);
+			if (raw->data.mouse.usButtonFlags & 0x80) Event(keyupEventID, (long)VK_XBUTTON1);
+			if (raw->data.mouse.usButtonFlags & 0x200) Event(keyupEventID, (long)VK_XBUTTON2);
 			if (raw->data.mouse.lLastX || raw->data.mouse.lLastY)
-				Event("mousemove", (long)raw->data.mouse.lLastX, (long)raw->data.mouse.lLastY);
+				Event(mousemoveEventID, (long)raw->data.mouse.lLastX, (long)raw->data.mouse.lLastY);
 		}
 
 		delete[] lpb;
@@ -131,11 +136,11 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 	}
 
 	case WM_ACTIVATE:
-		Event("activate", (bool)(wParam != WA_INACTIVE));
+		Event(activateEventID, (bool)(wParam != WA_INACTIVE));
 		break;
 
 	case WM_CLOSE:
-		Event("close");
+		Event(closeEventID);
 		break;
 	default:
 		return DefWindowProcW(hWnd, nMsg, wParam, lParam);
