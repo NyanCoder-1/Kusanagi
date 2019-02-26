@@ -1,13 +1,12 @@
 #pragma once
 
-namespace Kusanagi
-{
+namespace Kusanagi {
+
 	class Core;
 
-	namespace Controller
-	{
-		class Controller
-		{
+	namespace Controller {
+	
+		class Controller {
 		private:
 			Kusanagi::Core *core;
 		public:

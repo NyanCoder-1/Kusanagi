@@ -1,8 +1,7 @@
 #include "view/render/Buffer-DX11.h"
 #include "view/render/Render-DX11.h"
 
-Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateVertexBuffer(Kusanagi::View::Render::RenderDX11* render, void * data, const unsigned int size, bool dynamic)
-{
+Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateVertexBuffer(Kusanagi::View::Render::RenderDX11* render, void * data, const unsigned int size, bool dynamic) {
 	Microsoft::WRL::ComPtr<ID3D11Buffer> ret;
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
@@ -18,8 +17,7 @@ Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateV
 	return ret;
 }
 
-Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateIndexBuffer(Kusanagi::View::Render::RenderDX11* render, void * data, const unsigned int size, bool dynamic)
-{
+Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateIndexBuffer(Kusanagi::View::Render::RenderDX11* render, void * data, const unsigned int size, bool dynamic) {
 	Microsoft::WRL::ComPtr<ID3D11Buffer> ret;
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
@@ -35,8 +33,7 @@ Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateI
 	return ret;
 }
 
-Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateConstantBuffer(Kusanagi::View::Render::RenderDX11* render, const unsigned int size, bool dynamic)
-{
+Microsoft::WRL::ComPtr<ID3D11Buffer> Kusanagi::View::Render::BufferDX11::CreateConstantBuffer(Kusanagi::View::Render::RenderDX11* render, const unsigned int size, bool dynamic) {
 	Microsoft::WRL::ComPtr<ID3D11Buffer> ret;
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));

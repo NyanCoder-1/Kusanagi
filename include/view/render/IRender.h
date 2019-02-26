@@ -1,13 +1,10 @@
 #pragma once
 
-namespace Kusanagi
-{
+namespace Kusanagi {
 	class Core;
 
-	namespace View::Render
-	{
-		class IRender
-		{
+	namespace View::Render {
+		class IRender {
 		protected:
 			Kusanagi::Core *core;
 

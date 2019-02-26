@@ -5,8 +5,7 @@
 #include <Windows.h>
 
 #include "window/WinWindow.h"
-namespace Kusanagi::Window
-{
+namespace Kusanagi::Window {
 	typedef Kusanagi::Window::WinWindow Window;
 }
 #endif // defined(_WIN32)

@@ -1,17 +1,13 @@
 #pragma once
 
-namespace Kusanagi
-{
+namespace Kusanagi {
 	class Core;
 
-	namespace View
-	{
-		namespace Render
-		{
+	namespace View {
+		namespace Render {
 			class IRender;
 		}
-		class View
-		{
+		class View {
 		private:
 			Kusanagi::Core *core;
 			Kusanagi::View::Render::IRender *render;

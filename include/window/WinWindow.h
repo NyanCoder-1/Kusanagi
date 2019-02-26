@@ -6,10 +6,8 @@
 #include "window/IWindow.h"
 #include "utils/EventManager.h"
 
-namespace Kusanagi::Window
-{
-	class WinWindow : public IWindow
-	{
+namespace Kusanagi::Window {
+	class WinWindow : public IWindow {
 	public:
 		// EventTypes
 		typedef Kusanagi::Utils::EventListenerTemplate<> EventClose;

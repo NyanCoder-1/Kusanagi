@@ -3,10 +3,9 @@
 #include <exception>
 #include <string>
 
-namespace Kusanagi::Utils
-{
-	class Exception : public std::exception
-	{
+namespace Kusanagi::Utils {
+
+	class Exception : public std::exception {
 	private:
 		std::string msg;
 		const char* sourceFile;

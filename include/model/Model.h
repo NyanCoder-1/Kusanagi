@@ -1,13 +1,12 @@
 #pragma once
 
-namespace Kusanagi
-{
+namespace Kusanagi {
+
 	class Core;
 
-	namespace Model
-	{
-		class Model
-		{
+	namespace Model {
+
+		class Model {
 		private:
 			Kusanagi::Core *core;
 

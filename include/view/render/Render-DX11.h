@@ -9,10 +9,8 @@
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")
 
-namespace Kusanagi::View::Render
-{
-	class RenderDX11 : public Kusanagi::View::Render::IRender
-	{
+namespace Kusanagi::View::Render {
+	class RenderDX11 : public Kusanagi::View::Render::IRender {
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device1> d3dDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext1> d3dImmediateContext = nullptr;

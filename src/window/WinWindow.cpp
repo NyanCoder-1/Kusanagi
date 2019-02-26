@@ -2,8 +2,7 @@
 #include "utils/Exception.h"
 #include "utils/Format.h"
 
-Kusanagi::Window::WinWindow::WinWindow()
-{
+Kusanagi::Window::WinWindow::WinWindow() {
 	keydownEventID = AddEvent("keydown");
 	keyupEventID = AddEvent("keyup");
 	mousemoveEventID = AddEvent("mousemove");
@@ -11,13 +10,11 @@ Kusanagi::Window::WinWindow::WinWindow()
 	closeEventID = AddEvent("close");
 	typeEventID = AddEvent("type");
 }
-Kusanagi::Window::WinWindow::~WinWindow()
-{
+Kusanagi::Window::WinWindow::~WinWindow() {
 
 }
 
-void Kusanagi::Window::WinWindow::Create()
-{
+void Kusanagi::Window::WinWindow::Create() {
 	// Регистрация класса
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
@@ -65,31 +62,25 @@ void Kusanagi::Window::WinWindow::Create()
 	ShowWindow(hWnd, SW_SHOW);
 }
 
-void Kusanagi::Window::WinWindow::Update()
-{
+void Kusanagi::Window::WinWindow::Update() {
 	MSG msg;
-	while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE))
-	{
+	while (PeekMessage(&msg, hWnd, 0, 0, PM_REMOVE)) {
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 }
 
-HWND Kusanagi::Window::WinWindow::GetHandler()
-{
+HWND Kusanagi::Window::WinWindow::GetHandler() {
 	return hWnd;
 }
 
-LRESULT __stdcall Kusanagi::Window::WinWindow::StaticProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
-{
+LRESULT __stdcall Kusanagi::Window::WinWindow::StaticProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam) {
 	void* ptr = reinterpret_cast<void*>(GetWindowLongPtrW(hWnd, GWLP_USERDATA));
 	return ptr ? reinterpret_cast<Kusanagi::Window::WinWindow*>(ptr)->Proc(hWnd, nMsg, wParam, lParam) : DefWindowProcW(hWnd, nMsg, wParam, lParam);
 }
 
-LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (nMsg)
-	{
+LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, LPARAM lParam) {
+	switch (nMsg) {
 	case WM_CHAR:
 		Event(typeEventID, (wchar_t)wParam);
 		break;
@@ -98,13 +89,14 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 	{
 		UINT dwSize;
 
-		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER)); // Get RawInput data size
+		// Get RawInput data size
+		GetRawInputData((HRAWINPUT)lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
 		LPBYTE lpb = new BYTE[dwSize];
 		if (lpb == NULL)
 			break;
 
-		if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) // Get RawInput data
-		{
+		// Get RawInput data
+		if (GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER)) != dwSize) {
 			OutputDebugString(TEXT("GetRawInputData does not return correct size !\n"));
 			break;
 		}
@@ -112,11 +104,8 @@ LRESULT Kusanagi::Window::WinWindow::Proc(HWND hWnd, UINT nMsg, WPARAM wParam, L
 		RAWINPUT* raw = (RAWINPUT*)lpb;
 
 		if (raw->header.dwType == RIM_TYPEKEYBOARD)
-		{
 			Event((raw->data.keyboard.Flags & 1) ? keyupEventID : keydownEventID, raw->data.keyboard.VKey);
-		}
-		else if (raw->header.dwType == RIM_TYPEMOUSE)
-		{
+		else if (raw->header.dwType == RIM_TYPEMOUSE) {
 			if (raw->data.mouse.usButtonFlags & 0x1) Event(keydownEventID, (long)VK_LBUTTON);
 			if (raw->data.mouse.usButtonFlags & 0x4) Event(keydownEventID, (long)VK_RBUTTON);
 			if (raw->data.mouse.usButtonFlags & 0x10) Event(keydownEventID, (long)VK_MBUTTON);

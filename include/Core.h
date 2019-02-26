@@ -1,26 +1,20 @@
 #pragma once
 
-namespace Kusanagi
-{
-	namespace Window
-	{
+namespace Kusanagi {
+	namespace Window {
 		class IWindow;
 	}
-	namespace Model
-	{
+	namespace Model {
 		class Model;
 	}
-	namespace View
-	{
+	namespace View {
 		class View;
 	}
-	namespace Controller
-	{
+	namespace Controller {
 		class Controller;
 	}
 
-	class Core
-	{
+	class Core {
 	private:
 		volatile bool running;
 		Kusanagi::Window::IWindow *wnd;

@@ -2,10 +2,8 @@
 
 #include "utils/EventManager.h"
 
-namespace Kusanagi::Window
-{
-	class IWindow : public Kusanagi::Utils::EventManager
-	{
+namespace Kusanagi::Window {
+	class IWindow : public Kusanagi::Utils::EventManager {
 	public:
 		virtual ~IWindow() {}
 

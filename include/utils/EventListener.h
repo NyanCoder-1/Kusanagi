@@ -2,18 +2,15 @@
 
 #include <functional>
 
-namespace Kusanagi::Utils
-{
-	class EventListener
-	{
+namespace Kusanagi::Utils {
+	class EventListener {
 	public:
 		EventListener() {}
 		virtual ~EventListener() {};
 	};
 
 	template <typename ...Args>
-	class EventListenerTemplate : public EventListener
-	{
+	class EventListenerTemplate : public EventListener {
 	private:
 		std::function<void(void*, Args...)> action;
 
@@ -22,12 +19,10 @@ namespace Kusanagi::Utils
 			EventListenerTemplate::action = action;
 		}
 
-		void _cdecl Run(void *sender, Args... args)
-		{
+		void _cdecl Run(void *sender, Args... args) {
 			action(sender, args...);
 		}
-		inline void _cdecl operator()(void *sender, Args... args)
-		{
+		inline void _cdecl operator()(void *sender, Args... args) {
 			Run(sender, args...);
 		}
 	};
@@ -42,12 +37,10 @@ namespace Kusanagi::Utils
 			EventListenerTemplate::action = action;
 		}
 
-		void _cdecl Run(void *sender) 
-		{
+		void _cdecl Run(void *sender) {
 			action(sender);
 		}
-		inline void _cdecl operator()(void *sender) 
-		{
+		inline void _cdecl operator()(void *sender) {
 			Run(sender);
 		}
 	};

@@ -6,8 +6,7 @@
 #include "utils/Format.h"
 #include <thread>
 
-Kusanagi::Core::Core()
-{
+Kusanagi::Core::Core() {
 	// init thing
 	running = true;
 	wnd = new Kusanagi::Window::Window();
@@ -21,7 +20,7 @@ Kusanagi::Core::Core()
 		// SetWindowTextA(reinterpret_cast<Kusanagi::Window::Window*>(wnd)->GetHandler(), Kusanagi::Utils::Format("keyup %d", key).c_str());
 	}));
 	wnd->AddEventListener("mousemove", new Kusanagi::Window::WinWindow::EventMouseMove([=](void* sender, long x, long y)->void {
-		SetWindowTextA(reinterpret_cast<Kusanagi::Window::Window*>(wnd)->GetHandler(), Kusanagi::Utils::Format("mousemove %d %d", x, y).c_str());
+		// SetWindowTextA(reinterpret_cast<Kusanagi::Window::Window*>(wnd)->GetHandler(), Kusanagi::Utils::Format("mousemove %d %d", x, y).c_str());
 	}));
 	wnd->AddEventListener("type", new Kusanagi::Window::WinWindow::EventType([=](void* sender, wchar_t ch)->void {
 		// SetWindowTextW(reinterpret_cast<Kusanagi::Window::Window*>(wnd)->GetHandler(), Kusanagi::Utils::Format(L"type %c", ch).c_str());
@@ -29,7 +28,6 @@ Kusanagi::Core::Core()
 	wnd->AddEventListener("activate", new Kusanagi::Window::WinWindow::EventActivate([=](void* sender, bool state)->void {
 		// SetWindowTextA(reinterpret_cast<Kusanagi::Window::Window*>(wnd)->GetHandler(), state ? "activate" : "deactivate");
 	}));
-	// we should call IWindow::Create after adding 'create' event listener
 	wnd->Create();
 
 	model = new Kusanagi::Model::Model(this);
@@ -37,8 +35,7 @@ Kusanagi::Core::Core()
 	controller = new Kusanagi::Controller::Controller(this);
 }
 
-Kusanagi::Core::~Core()
-{
+Kusanagi::Core::~Core() {
 	if (controller)
 		delete controller;
 	if (model)
@@ -49,13 +46,11 @@ Kusanagi::Core::~Core()
 		delete wnd;
 }
 
-int Kusanagi::Core::Run()
-{
+int Kusanagi::Core::Run() {
 	// put main loop(s) here
 	std::thread modelThread([=]() { while (running) model->Update(); }),
 		viewThread([=]() {  });
-	while (running)
-	{
+	while (running) {
 		wnd->Update();
 		view->Update();
 	}
@@ -68,12 +63,10 @@ int Kusanagi::Core::Run()
 	return 0;
 }
 
-void Kusanagi::Core::Terminate()
-{
+void Kusanagi::Core::Terminate() {
 	running = false;
 }
 
-Kusanagi::Window::IWindow *Kusanagi::Core::GetWindow() const
-{
+Kusanagi::Window::IWindow *Kusanagi::Core::GetWindow() const {
 	return wnd;
 }
