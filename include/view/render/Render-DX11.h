@@ -15,7 +15,7 @@ namespace Kusanagi::View::Render
 	{
 	private:
 		Microsoft::WRL::ComPtr<ID3D11Device1> d3dDevice;
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext1> d3dImmediateContext;
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext1> d3dImmediateContext = nullptr;
 		std::vector<Microsoft::WRL::ComPtr<ID3D11DeviceContext1>> d3dDeferredContexts;
 		Microsoft::WRL::ComPtr<IDXGISwapChain> swapChain;
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> d3dRTV;
@@ -26,11 +26,16 @@ namespace Kusanagi::View::Render
 
 	public:
 		RenderDX11(Kusanagi::Core *core);
-		virtual ~RenderDX11() override;
+		~RenderDX11();
 
 		void Init() override;
-		void Draw() override;
+		void DrawBegin() override;
+		void DrawEnd() override;
 		void Resize(unsigned long width, unsigned long height) override;
+
+	public:
+		ID3D11Device1 *GetDevice();
+		ID3D11DeviceContext1 *GetDeviceContext();
 
 	private:
 		void createDeviceAndContext();

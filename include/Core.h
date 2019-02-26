@@ -22,7 +22,7 @@ namespace Kusanagi
 	class Core
 	{
 	private:
-		bool running;
+		volatile bool running;
 		Kusanagi::Window::IWindow *wnd;
 		Kusanagi::Model::Model *model;
 		Kusanagi::View::View *view;

@@ -17,7 +17,8 @@ namespace Kusanagi
 			virtual ~IRender() {}
 
 			virtual void Init() = 0;
-			virtual void Draw() = 0;
+			virtual void DrawBegin() = 0;
+			virtual void DrawEnd() = 0;
 			virtual void Resize(unsigned long width, unsigned long height) = 0;
 		};
 	}

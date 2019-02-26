@@ -39,12 +39,12 @@ Kusanagi::Core::Core()
 
 Kusanagi::Core::~Core()
 {
-	if (view)
-		delete view;
 	if (controller)
 		delete controller;
 	if (model)
 		delete model;
+	if (view)
+		delete view;
 	if (wnd)
 		delete wnd;
 }
@@ -53,9 +53,12 @@ int Kusanagi::Core::Run()
 {
 	// put main loop(s) here
 	std::thread modelThread([=]() { while (running) model->Update(); }),
-		viewThread([=]() { while (running) view->Update(); });
+		viewThread([=]() {  });
 	while (running)
+	{
 		wnd->Update();
+		view->Update();
+	}
 
 	if (modelThread.joinable())
 		modelThread.join();

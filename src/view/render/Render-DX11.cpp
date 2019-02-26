@@ -15,7 +15,7 @@ Kusanagi::View::Render::RenderDX11::RenderDX11(Kusanagi::Core *c)
 }
 Kusanagi::View::Render::RenderDX11::~RenderDX11()
 {
-	if (d3dImmediateContext.Get()) d3dImmediateContext->ClearState();
+	if (d3dImmediateContext) d3dImmediateContext->ClearState();
 }
 
 
@@ -43,11 +43,14 @@ void Kusanagi::View::Render::RenderDX11::Init()
 	// Подключаем вьюпорт к контексту устройства
 	d3dImmediateContext->RSSetViewports(1, &vp);
 }
-void Kusanagi::View::Render::RenderDX11::Draw()
+void Kusanagi::View::Render::RenderDX11::DrawBegin()
 {
 	// Просто очищаем задний буфер
-	float  ClearColor[4] = { 0.0f, 0.0f, 1.0f, 1.0f }; // красный, зеленый, синий, альфа-канал
-	d3dImmediateContext->ClearRenderTargetView(d3dRTV.Get(), DirectX::Colors::OldLace);
+	d3dImmediateContext->ClearRenderTargetView(d3dRTV.Get(), DirectX::Colors::OliveDrab);
+	d3dImmediateContext->ClearDepthStencilView(d3dDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0)
+}
+void Kusanagi::View::Render::RenderDX11::DrawEnd()
+{
 	// Выбросить задний буфер на экран
 	swapChain->Present(0, 0);
 }
@@ -56,13 +59,23 @@ void Kusanagi::View::Render::RenderDX11::Resize(unsigned long width, unsigned lo
 
 }
 
+ID3D11Device1 * Kusanagi::View::Render::RenderDX11::GetDevice()
+{
+	return d3dDevice.Get();
+}
+
+ID3D11DeviceContext1 * Kusanagi::View::Render::RenderDX11::GetDeviceContext()
+{
+	return d3dImmediateContext.Get();
+}
+
 
 void Kusanagi::View::Render::RenderDX11::createDeviceAndContext()
 {
 	HRESULT hr = S_OK;
 	UINT createDeviceFlags = 0;
-#if defined(DEBUG)
-	createDeviceFlags |= D3D11_CREATE_DEVICE_FLAG;
+#if defined(_DEBUG)
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
 	D3D_DRIVER_TYPE driverTypes[] 
@@ -120,7 +133,7 @@ void Kusanagi::View::Render::RenderDX11::createSwapChain()
 
 	Microsoft::WRL::ComPtr<IDXGIFactory2> dxgiFactory2 = 0;
 	//hr = dxgiFactory->QueryInterface(__uuidof(IDXGIFactory2), reinterpret_cast<void**>(dxgiFactory2.GetAddressOf()));
-	if (SUCCEEDED(dxgiFactory.As(&dxgiFactory2)))
+	if (SUCCEEDED(dxgiFactory.As(&dxgiFactory2)) && (featureLevel >= D3D_FEATURE_LEVEL_11_1))
 	{
 		DXGI_SWAP_CHAIN_DESC1 sd;
 		ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC1));    // очищаем ее
@@ -133,7 +146,7 @@ void Kusanagi::View::Render::RenderDX11::createSwapChain()
 		sd.SampleDesc.Quality = 0;
 		DXGI_SWAP_CHAIN_FULLSCREEN_DESC sfsd;
 		ZeroMemory(&sfsd, sizeof(DXGI_SWAP_CHAIN_FULLSCREEN_DESC));    // очищаем ее
-		sfsd.RefreshRate.Numerator = 0;
+		sfsd.RefreshRate.Numerator = 75;
 		sfsd.RefreshRate.Denominator = 1;
 		sfsd.Scaling = DXGI_MODE_SCALING_STRETCHED;
 		sfsd.Windowed = TRUE;

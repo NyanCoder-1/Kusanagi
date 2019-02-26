@@ -69,6 +69,12 @@
     <ClCompile Include="..\..\..\src\window\WinWindow.cpp">
       <Filter>src\window</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\view\render\Buffer-DX11.cpp">
+      <Filter>src\view\render</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\view\render\Shader-DX11.cpp">
+      <Filter>src\view\render</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\Core.h">
@@ -118,6 +124,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\include\view\render\Render.h">
       <Filter>include\view\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\render\Buffer-DX11.h">
+      <Filter>include\view\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\render\Shader-DX11.h">
+      <Filter>include\view\render</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\IMaterial.h">
+      <Filter>include\view</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

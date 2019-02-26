@@ -24,7 +24,9 @@
     <ClCompile Include="..\..\..\src\model\Model.cpp" />
     <ClCompile Include="..\..\..\src\utils\Exception.cpp" />
     <ClCompile Include="..\..\..\src\utils\Format.cpp" />
+    <ClCompile Include="..\..\..\src\view\render\Buffer-DX11.cpp" />
     <ClCompile Include="..\..\..\src\view\render\Render-DX11.cpp" />
+    <ClCompile Include="..\..\..\src\view\render\Shader-DX11.cpp" />
     <ClCompile Include="..\..\..\src\window\WinWindow.cpp" />
     <ClCompile Include="..\..\..\src\view\View.cpp" />
   </ItemGroup>
@@ -38,7 +40,10 @@
     <ClInclude Include="..\..\..\include\utils\EventManager.h" />
     <ClInclude Include="..\..\..\include\utils\Exception.h" />
     <ClInclude Include="..\..\..\include\utils\Format.h" />
+    <ClInclude Include="..\..\..\include\view\IMaterial.h" />
+    <ClInclude Include="..\..\..\include\view\render\Buffer-DX11.h" />
     <ClInclude Include="..\..\..\include\view\render\Render.h" />
+    <ClInclude Include="..\..\..\include\view\render\Shader-DX11.h" />
     <ClInclude Include="..\..\..\include\window\IWindow.h" />
     <ClInclude Include="..\..\..\include\view\render\Render-DX11.h" />
     <ClInclude Include="..\..\..\include\view\render\IRender.h" />
@@ -100,22 +105,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin32</OutDir>
+    <OutDir>$(SolutionDir)bin32\</OutDir>
     <TargetName>$(ProjectName)_debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin64</OutDir>
+    <OutDir>$(SolutionDir)bin64\</OutDir>
     <TargetName>$(ProjectName)_debug</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin32</OutDir>
+    <OutDir>$(SolutionDir)bin32\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)bin64</OutDir>
+    <OutDir>$(SolutionDir)bin64\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

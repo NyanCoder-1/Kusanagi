@@ -20,7 +20,7 @@ namespace Kusanagi::Utils
 		EventManager() : EventManager(std::vector<std::string>{}) {}
 		EventManager(std::vector<std::string> keys)
 		{
-			long long i = 0;
+			unsigned int i = 0;
 			for (std::string &str : keys)
 				if (this->keys.find(str) == this->keys.end())
 					this->keys[str] = i++;
@@ -58,7 +58,7 @@ namespace Kusanagi::Utils
 				return;
 			}
 			// add listener
-			events[id].push_back(listener);
+			events[static_cast<const unsigned int>(id)].push_back(listener);
 
 			// set delete check
 			if (deleteHere)
@@ -70,7 +70,7 @@ namespace Kusanagi::Utils
 			if ((id >= 0) && (id < events.size()))
 			{
 				// search listener
-				auto &e = events[id];
+				auto &e = events[static_cast<const unsigned int>(id)];
 				for (auto iter = e.begin(); iter != e.end();)
 					if (*iter == listener)
 					{
@@ -114,14 +114,14 @@ namespace Kusanagi::Utils
 		{
 			if ((id < 0) && (id >= events.size()))
 				return;
-			for (Kusanagi::Utils::EventListener *listener : events[id])
+			for (Kusanagi::Utils::EventListener *listener : events[static_cast<const unsigned int>(id)])
 				reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<Args...>*>(listener)->Run(this, args...);
 		}
 		void Event(long long id)
 		{
 			if ((id < 0) && (id >= events.size()))
 				return;
-			for (Kusanagi::Utils::EventListener *listener : events[id])
+			for (Kusanagi::Utils::EventListener *listener : events[static_cast<const unsigned int>(id)])
 				reinterpret_cast<Kusanagi::Utils::EventListenerTemplate<>*>(listener)->Run(this);
 		}
 	};

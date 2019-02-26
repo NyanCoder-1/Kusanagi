@@ -17,5 +17,7 @@ Kusanagi::View::View::~View()
 
 void Kusanagi::View::View::Update()
 {
-	render->Draw();
+	render->DrawBegin();
+
+	render->DrawEnd();
 }
