@@ -75,6 +75,12 @@
     <ClCompile Include="..\..\..\src\view\render\Shader-DX11.cpp">
       <Filter>src\view\render</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\view\Mesh-DX11.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\view\Material-DX11.cpp">
+      <Filter>src\view</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\Core.h">
@@ -132,6 +138,15 @@
       <Filter>include\view\render</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\include\view\IMaterial.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\IMesh.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\Mesh-DX11.h">
+      <Filter>include\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\view\Material-DX11.h">
       <Filter>include\view</Filter>
     </ClInclude>
   </ItemGroup>

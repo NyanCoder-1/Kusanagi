@@ -4,14 +4,14 @@ namespace Kusanagi {
 	class Core;
 
 	namespace View {
-		class IMaterial {
+		class IMesh {
 		protected:
 			Kusanagi::Core *core;
 
 		public:
-			IMaterial() = delete;
-			IMaterial(Kusanagi::Core *_core) : core(_core) {}
-			virtual ~IMaterial() {}
+			IMesh() = delete;
+			IMesh(Kusanagi::Core *_core) : core(_core) {}
+			virtual ~IMesh() {}
 
 			virtual void Set() = 0;
 		};

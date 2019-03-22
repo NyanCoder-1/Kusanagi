@@ -10,7 +10,7 @@ namespace Kusanagi {
 
 		public:
 			IRender() = delete;
-			IRender(Kusanagi::Core *c) { core = c; }
+			IRender(Kusanagi::Core *_core) : core(_core) {}
 			virtual ~IRender() {}
 
 			virtual void Init() = 0;
